@@ -1,0 +1,20 @@
+<po-page-default p-title="Tabela de Usuarios">
+
+    <po-dynamic-form #dynamicForm 
+        p-auto-focus="nome" 
+       [p-fields]="fields" 
+       [p-load]="onLoadFields.bind(this)"
+       [p-value]="usuario">
+    </po-dynamic-form>
+
+    <div class="po-row">
+        <po-button class="po-md-3" p-label="Salvar" [p-disabled]="dynamicForm?.form.invalid"
+            (p-click)="salvarForm(dynamicForm.form)">
+        </po-button>
+    </div>
+    
+    <po-divider p-label="Lista de Usuários"></po-divider>
+
+    <po-grid [p-row-actions]="rowActions" [p-data]="usuarios" [p-columns]="columns">
+    </po-grid>
+</po-page-default>

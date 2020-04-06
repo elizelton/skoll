@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { PoMenuItem } from '@portinari/portinari-ui';
+import { PoMenuItem, PoToolbarProfile } from '@portinari/portinari-ui';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +10,16 @@ import { PoMenuItem } from '@portinari/portinari-ui';
 export class AppComponent {
 
   readonly menus: Array<PoMenuItem> = [
-    { label: 'Home', action: this.onClick.bind(this) }
+    { label: 'Home', link: '/' },
+    { label: 'Counter', link: '/counter' },
+    { label: 'Fetch-data', link: '/fetch-data' },
+    { label: 'Usuarios', link: '/usuarios' },
+    { label: 'Login', link: '/login' },
   ];
 
-  private onClick() {
-    alert('Clicked in menu item')
-  }
-
+  profile: PoToolbarProfile = {
+    avatar: '../assets/img/mail.png',
+    subtitle: 'skoll.uepg@gmail.com',
+    title: 'Skoll Adm'
+  };
 }

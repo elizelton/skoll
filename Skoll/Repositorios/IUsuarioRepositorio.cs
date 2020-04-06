@@ -13,6 +13,7 @@ namespace Skoll.Repositorios
         IEnumerable<Usuario> GetAll();
 
         Usuario Find(long id);
+        Usuario FindByLogin(string login);
 
         void Remove(long id);
 

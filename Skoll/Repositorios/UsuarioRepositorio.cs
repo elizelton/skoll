@@ -28,6 +28,11 @@ namespace Skoll.Repositorios
             return _contexto.Usuario.FirstOrDefault(x => x.Id == id);
         }
 
+        public Usuario FindByLogin(string login)
+        {
+            return _contexto.Usuario.FirstOrDefault(x => x.Login == login);
+        }
+
         public IEnumerable<Usuario> GetAll()
         {
             return _contexto.Usuario.ToList();

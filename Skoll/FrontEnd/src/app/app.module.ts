@@ -1,4 +1,5 @@
 import { LoginComponent } from './pages/login/login.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +11,8 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { PoModule } from '@portinari/portinari-ui';
+import { PoTemplatesModule } from '@portinari/portinari-templates';
 import { PagesModule } from './pages/pages.module';
 
 
@@ -31,7 +34,10 @@ import { PagesModule } from './pages/pages.module';
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'usuarios', component: UsuariosComponent },
     ]),
+    PoModule,
+    PoTemplatesModule,
     PagesModule
   ],
   providers: [],
