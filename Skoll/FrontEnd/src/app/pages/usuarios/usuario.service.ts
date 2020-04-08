@@ -22,6 +22,16 @@ export class UsuarioService {
     return this.http.post<IUsuario>(this.apiUrl, usuario, this.httpOptions);
   }
 
+  editarUsuario(usuarioID: string, usuario: IUsuario): Observable<IUsuario> {
+    const apiurl = `${this.apiUrl}/${usuarioID}`;
+    return this.http.put<IUsuario>(apiurl, usuario, this.httpOptions);
+  }
+
+  excluirUsuario(usuarioID: Number): Observable<Number> {
+    const apiurl = `${this.apiUrl}/${usuarioID}`;
+    return this.http.delete<number>(apiurl, this.httpOptions);
+  }
+
   getUserDocument(value) {
     return {
       fields: [ document ]

@@ -11,10 +11,8 @@ export class AppComponent {
 
   readonly menus: Array<PoMenuItem> = [
     { label: 'Home', link: '/' },
-    { label: 'Counter', link: '/counter' },
-    { label: 'Fetch-data', link: '/fetch-data' },
     { label: 'Usuarios', link: '/usuarios' },
-    { label: 'Login', link: '/login' },
+    // { label: 'Login', link: '/login' },
   ];
 
   profile: PoToolbarProfile = {

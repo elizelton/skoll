@@ -47,7 +47,7 @@ namespace Skoll.Controllers
               
             if(_usuarioRepositorio.FindByLogin(user.Login) != null)
             {
-                return new BadRequestObjectResult($"Login '{ user.Login }' já existente na base.");
+                return new BadRequestObjectResult($"Login: **{ user.Login }** já cadastrado!");
             }
 
             _usuarioRepositorio.Add(user);

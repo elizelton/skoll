@@ -1,14 +1,52 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-  <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-  <li><a href='https://angular.io/'>Angular</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-  <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-  <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-  <li><strong>Angular CLI integration</strong>. In development mode, there's no need to run <code>ng serve</code>. It runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-  <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration automatically invokes <code>ng build</code> to produce minified, ahead-of-time compiled JavaScript files.</li>
-</ul>
-<p>The <code>ClientApp</code> subdirectory is a standard Angular CLI application. If you open a command prompt in that directory, you can run any <code>ng</code> command (e.g., <code>ng test</code>), or use <code>npm</code> to install extra packages into it.</p>
+<po-page-default>
+  <div class="po-row">
+
+    <po-widget class="po-lg-6 po-mt-2" p-background="../../../assets/graphics/days-to-payment.png" p-height="210"
+      p-primary="true" p-title="Days to Payment" (p-click)="daysPayment()">
+
+      <div class="po-font-subtitle po-text-center">17 days left</div>
+      <div class="po-text-center">Scheduled to 05/04/2018</div>
+    </po-widget>
+
+    <po-widget class="po-lg-3 po-mt-2" p-height="200" p-primary="true" p-primary-label="Details" p-title="Total savings"
+      (p-primary-action)="openModal('savings')">
+
+      <div class="po-font-subtitle po-text-center">$5.000,00</div>
+      <div class="po-text-center">Last updated at 18:34</div>
+    </po-widget>
+
+    <po-widget class="po-lg-3 po-mt-2" p-height="200" p-primary-label="Details" p-title="Total checking account"
+      (p-primary-action)="openModal('account')">
+
+      <div class="po-font-subtitle po-text-center">$2.818,29</div>
+      <div class="po-text-center">Last updated at 08:20</div>
+    </po-widget>
+
+  </div>
+
+  <div class="po-row">
+
+    <po-widget class="po-md-12 po-lg-4 po-mt-2" p-title="Category with the highest expense">
+
+      <div class="po-font-subtitle po-text-center">$1.500,00</div>
+      <div class="po-text-center">Meal</div>
+    </po-widget>
+
+    <po-widget class="po-md-12 po-lg-4 po-mt-2" p-title="Most used payment type">
+
+      <div class="po-font-subtitle po-text-center">Credit card</div>
+      <div class="po-text-center">MasterCard - 5500 0000 0000 0004</div>
+    </po-widget>
+
+    <po-widget class="po-md-12 po-lg-4 po-mt-2" p-title="Higher revenue in month">
+
+      <div class="po-font-subtitle po-text-center">$2.000,00</div>
+      <div class="po-text-center">05/03/2018</div>
+    </po-widget>
+  </div>
+
+  <po-modal #detailsModal [p-title]="titleDetailsModal">
+    <po-table [p-columns]="columnsDetails" [p-items]="itemsDetails">
+    </po-table>
+  </po-modal>
+</po-page-default>

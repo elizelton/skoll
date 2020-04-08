@@ -5,6 +5,7 @@
        [p-fields]="fields" 
        [p-load]="onLoadFields.bind(this)"
        [p-value]="usuario">
+
     </po-dynamic-form>
 
     <div class="po-row">
@@ -15,6 +16,10 @@
     
     <po-divider p-label="Lista de Usuários"></po-divider>
 
-    <po-grid [p-row-actions]="rowActions" [p-data]="usuarios" [p-columns]="columns">
-    </po-grid>
+    <po-table
+        [p-items]="usuarios"
+        p-striped="true" 
+        [p-columns]="columns"
+        [p-actions]="actions">
+    </po-table>
 </po-page-default>
