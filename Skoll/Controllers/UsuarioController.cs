@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading.Tasks;
 using Core.Entities;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +16,8 @@ namespace Skoll.Controllers
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
+
+        private readonly MD5 md5 = new MD5CryptoServiceProvider();
         public UsuarioController(IUsuarioRepositorio _usuarioRepo)
         {
             _usuarioRepositorio = _usuarioRepo;
@@ -50,6 +54,8 @@ namespace Skoll.Controllers
                 return new BadRequestObjectResult($"Login: **{ user.Login }** já cadastrado!");
             }
 
+            user.Senha = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(user.Senha)).ToString();
+
             _usuarioRepositorio.Add(user);
 
             return CreatedAtRoute("GetUsuario", new { id = user.Id }, user);
@@ -62,17 +68,18 @@ namespace Skoll.Controllers
             if (user == null || user.Id != id)
                 return BadRequest();
 
-            var usuario = _usuarioRepositorio.Find(id); 
+            var usuario = _usuarioRepositorio.Find(id);
 
-            if (user == null)
-                return NotFound();
+            if (usuario == null)
+                return BadRequest();
 
             usuario.Login = user.Login;
             usuario.Nome = user.Nome;
-            usuario.Senha = user.Senha;
+            if(!String.IsNullOrEmpty(user.Senha))
+                usuario.Senha = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(user.Senha)).ToString();
             usuario.Situacao = user.Situacao;
 
-            _usuarioRepositorio.Update(usuario);
+            _usuarioRepositorio.AddUpdate(usuario);
 
             return new NoContentResult();
         }

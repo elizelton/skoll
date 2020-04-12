@@ -1,0 +1,16 @@
+<po-page-default p-title="{{ titulo }}">
+
+    <po-dynamic-form #dynamicForm 
+        p-auto-focus="nome"
+        [p-fields]="fields" 
+        [p-load]="onLoadFields.bind(this)"
+        [p-value]="usuario">
+
+    </po-dynamic-form>
+
+    <div class="po-row">
+        <po-button class="po-md-3" p-label="Salvar" [p-disabled]="dynamicForm?.form.invalid && dynamicForm.form.touched"
+            (p-click)="salvarForm(dynamicForm.form)">
+        </po-button>
+    </div>
+</po-page-default>

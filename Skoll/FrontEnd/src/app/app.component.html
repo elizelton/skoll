@@ -1,10 +1,16 @@
 <div class="po-wrapper">
-    <po-toolbar p-title="Skoll"
-        [p-profile]="profile"
-    >
-    </po-toolbar>
+    <nav *ngIf="mostrarMenu">
+        <po-toolbar p-title="Skoll" [p-profile]="profile">
+        </po-toolbar>
 
-    <po-menu [p-menus]="menus"></po-menu>
-    
+        <po-menu [p-menus]="menus" p-collapsed p-filter p-logo="../assets/img/logo.png">
+            <div *p-menu-header-template class="po-p-2 po-font-title sample-menu-header-text-color">
+                <p>Bem vindo,</p>
+                <p>
+                    <b> Skoll Adm </b>
+                </p>
+            </div>
+        </po-menu>
+    </nav>
     <router-outlet></router-outlet>
 </div>

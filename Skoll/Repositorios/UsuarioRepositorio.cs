@@ -50,5 +50,20 @@ namespace Skoll.Repositorios
             _contexto.Usuario.Update(usuario);
             _contexto.SaveChanges();
         }
+
+        public void AddUpdate(Usuario usuario)
+        {
+            if (usuario.Id == 0)
+                _contexto.Add(usuario);
+             else
+                _contexto.Usuario.Update(usuario);
+
+            _contexto.SaveChanges();
+        }
+
+        public bool ValidaAutenticacaoUsuario(Usuario usuario)
+        {
+            return _contexto.Usuario.Any(x => x.Login == usuario.Login && x.Senha == usuario.Senha && x.Situacao == true);
+        }
     }
 }

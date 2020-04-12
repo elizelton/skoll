@@ -18,6 +18,10 @@ export class UsuarioService {
     return this.http.get<IUsuario[]>(this.apiUrl);
   }
 
+  getUsuario(usuarioID: String): Observable<IUsuario> {
+    return this.http.get<IUsuario>(this.apiUrl + '/' + usuarioID );
+  }
+
   postUsuario(usuario: IUsuario): Observable<IUsuario> {
     return this.http.post<IUsuario>(this.apiUrl, usuario, this.httpOptions);
   }

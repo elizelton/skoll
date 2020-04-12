@@ -102,7 +102,7 @@
   --color-primary-light-95: #FCF6F9;
 
   /* Borda inferior da Table Header */
-  --color-primary-light-80: #F5DBE8;
+  --color-primary-light-80: #07541252;
 
   /* Scroll (opacidade de 50%) */
   --color-primary-alpha-50: rgba(4, 110, 4, 0.5);
@@ -192,7 +192,7 @@
   --color-warning: #ea9b3e;
 
 
-  --color-danger-light-40: #cd5f58;
+  --color-danger-light-40: rgb(13, 109, 13);
 
   /* Background do Feedback de erro, Borda de Input com erro */
   --color-danger: #c64840;
@@ -241,23 +241,23 @@
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: url('./../fonts/Roboto/Roboto-Regular.ttf');
+  font-family: 'Futura, "Trebuchet MS", Arial, sans-serif';
+  src: url('./../fonts/Futura/futur.ttf');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'Roboto-Condensed-Light';
-  src: url('./../fonts/Roboto/Roboto-Light.ttf');
+  font-family: 'Futura, "Trebuchet MS", Arial, sans-serif';
+  src: url('./../fonts/Futura/FuturaLightfont.ttf');
   font-weight: 300;
   font-style: normal;
   font-stretch: condensed;
 }
 
 @font-face {
-  font-family: 'Roboto-Bold';
-  src: url('./../fonts/Roboto/Roboto-Bold.ttf');
+  font-family: 'Futura, "Trebuchet MS", Arial, sans-serif';
+  src: url('./../fonts/Futura/FuturaBoldfont.ttf');
   font-weight: bold;
   font-style: normal;
 }

@@ -11,6 +11,8 @@ import { HomeComponent } from './home/home.component';
 import { PoModule } from '@portinari/portinari-ui';
 import { PoTemplatesModule } from '@portinari/portinari-templates';
 import { PagesModule } from './pages/pages.module';
+import { UsuarioComponent } from './pages/usuario/usuario.component';
+import { AuthGuardComponent } from './auth-guard/auth-guard.component';
 
 
 
@@ -18,15 +20,18 @@ import { PagesModule } from './pages/pages.module';
   declarations: [
     AppComponent,
     HomeComponent,
+    AuthGuardComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', component: LoginComponent, pathMatch: 'full' },
       { path: 'login', component: LoginComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'usuarios', component: UsuariosComponent },
+      { path: 'usuario/:id', component: UsuarioComponent },
     ]),
     PoModule,
     PoTemplatesModule,

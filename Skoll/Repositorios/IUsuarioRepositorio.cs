@@ -19,5 +19,8 @@ namespace Skoll.Repositorios
 
         void Update(Usuario usuario);
 
+        void AddUpdate(Usuario usuario);
+
+        public bool ValidaAutenticacaoUsuario(Usuario usuario);
     }
 }
