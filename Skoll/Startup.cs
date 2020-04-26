@@ -1,3 +1,4 @@
+using Core.Entities;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -42,7 +43,7 @@ namespace Skoll
                 )
             );
 
-            services.AddTransient<IUsuarioRepositorio, Repositorios.UsuarioRepositorio>();
+            services.AddTransient<IRepositorio<Usuario>, Repositorios.IRepositorio<Usuario>>();
 
             var signingConfigurations = new SigningConfigurations();
             services.AddSingleton(signingConfigurations);
@@ -106,7 +107,7 @@ namespace Skoll
             }
 
             app.UseRouting();
-
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

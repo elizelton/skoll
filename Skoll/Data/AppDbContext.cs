@@ -8,12 +8,12 @@ namespace Skoll.Data
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        public AppDbContext(DbContextOptions<AppDbContext> options)
-          : base(options)
+        public AppDbContext()
+          : base()
         {
         }
 
-        public DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Usuario> Usuario { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

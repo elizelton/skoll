@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Skoll.Data;
 using Skoll.Entities;
 using Skoll.Repositorios;
 using Skoll.Util;
@@ -21,13 +22,13 @@ namespace Skoll.Controllers
     [ApiController]
     public class AutenticacaoController : ControllerBase
     {
-        private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private IUnitOfWork uow;
 
         private readonly MD5 md5 = new MD5CryptoServiceProvider();
 
-        public AutenticacaoController(IUsuarioRepositorio _usuarioRepo)
+        public AutenticacaoController(IUnitOfWork unitOfWork)
         {
-            _usuarioRepositorio = _usuarioRepo;
+            uow = unitOfWork;
         }
 
         [AllowAnonymous]
@@ -37,11 +38,14 @@ namespace Skoll.Controllers
             [FromServices]SigningConfigurations signingConfigurations,
             [FromServices]TokenConfigurations tokenConfigurations)
         {
-            if (usuario == null || usuario.Login == "" || usuario.Senha == "")
+            if (usuario == null || String.IsNullOrEmpty(usuario.Login) || String.IsNullOrEmpty(usuario.Senha))
                 return BadRequest();
 
+            var usuarioAutenticado = uow.UsuarioRepositorio.Get(u => u.Login == usuario.Login 
+                                                                  && u.Senha == usuario.Senha 
+                                                                  && u.Situacao == true);
 
-            if (_usuarioRepositorio.ValidaAutenticacaoUsuario(usuario))
+            if (usuarioAutenticado != null)
             {
                 ClaimsIdentity identity = new ClaimsIdentity(
                     new GenericIdentity(usuario.Login, "Login"),
@@ -53,7 +57,7 @@ namespace Skoll.Controllers
 
                 DateTime dataCriacao = DateTime.Now;
                 DateTime dataExpiracao = dataCriacao +
-                    TimeSpan.FromSeconds(tokenConfigurations.Seconds);
+                    TimeSpan.FromHours(tokenConfigurations.Hours);
 
                 var handler = new JwtSecurityTokenHandler();
                 var securityToken = handler.CreateToken(new SecurityTokenDescriptor
@@ -69,19 +73,17 @@ namespace Skoll.Controllers
 
                 return new
                 {
-                    authenticated = true,
-                    created = dataCriacao.ToString("yyyy-MM-dd HH:mm:ss"),
-                    expiration = dataExpiracao.ToString("yyyy-MM-dd HH:mm:ss"),
+                    login = usuarioAutenticado.Login,
+                    nome = usuarioAutenticado.Nome,
+                    autenticado = true,
                     accessToken = token,
-                    message = "OK"
                 };
             }
             else
             {
                 return new
                 {
-                    authenticated = false,
-                    message = "Falha ao autenticar"
+                    autenticado = false,
                 };
             }
         }

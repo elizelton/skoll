@@ -5,8 +5,10 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Skoll.Data;
 using Skoll.Repositorios;
 
 namespace Skoll.Controllers
@@ -15,26 +17,28 @@ namespace Skoll.Controllers
     [ApiController]
     public class UsuarioController : Controller
     {
-        private readonly IUsuarioRepositorio _usuarioRepositorio;
+        private IUnitOfWork uow;
 
         private readonly MD5 md5 = new MD5CryptoServiceProvider();
-        public UsuarioController(IUsuarioRepositorio _usuarioRepo)
+        public UsuarioController(IUnitOfWork unitOfWork)
         {
-            _usuarioRepositorio = _usuarioRepo;
+            uow = unitOfWork;
         }
 
-        // GET: api/Usuario
+        // GET: api/Usuario     
+        //[Authorize("Bearer")]
         [HttpGet]
         public IEnumerable<Usuario> Get()
         {
-            return _usuarioRepositorio.GetAll();
+            return uow.UsuarioRepositorio.GetAll();
         }
 
         // GET: api/Usuario/5
+        //[Authorize("Bearer")]
         [HttpGet("{id}", Name = "GetUsuario")]
         public IActionResult Get(int id)
         {
-            var usuario = _usuarioRepositorio.Find(id);
+            var usuario = uow.UsuarioRepositorio.Get(u => u.Id == id);
 
             if (usuario == null)
                 return NotFound();
@@ -43,32 +47,36 @@ namespace Skoll.Controllers
         }
 
         // POST: api/Usuario
+        //[Authorize("Bearer")]
         [HttpPost]
         public IActionResult Post([FromBody] Usuario user)
         {
             if (user == null)
                 return BadRequest();
               
-            if(_usuarioRepositorio.FindByLogin(user.Login) != null)
+            if(uow.UsuarioRepositorio.Get(u => u.Login == user.Login) != null)
             {
                 return new BadRequestObjectResult($"Login: **{ user.Login }** já cadastrado!");
             }
 
             user.Senha = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(user.Senha)).ToString();
 
-            _usuarioRepositorio.Add(user);
+            uow.UsuarioRepositorio.Adicionar(user);
+            uow.Commit();
+
 
             return CreatedAtRoute("GetUsuario", new { id = user.Id }, user);
         }
 
         // PUT: api/Usuario/5
+        //[Authorize("Bearer")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Usuario user)
         {
             if (user == null || user.Id != id)
                 return BadRequest();
 
-            var usuario = _usuarioRepositorio.Find(id);
+            var usuario = uow.UsuarioRepositorio.Get(u => u.Id == id);
 
             if (usuario == null)
                 return BadRequest();
@@ -79,21 +87,24 @@ namespace Skoll.Controllers
                 usuario.Senha = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(user.Senha)).ToString();
             usuario.Situacao = user.Situacao;
 
-            _usuarioRepositorio.AddUpdate(usuario);
+            uow.UsuarioRepositorio.Atualizar(usuario);
+            uow.Commit();
 
             return new NoContentResult();
         }
 
         // DELETE: api/ApiWithActions/5
+        //[Authorize("Bearer")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var usuario = _usuarioRepositorio.Find(id);
+            var usuario = uow.UsuarioRepositorio.Get(u => u.Id == id);
 
             if (usuario == null)
                 return NotFound();
 
-            _usuarioRepositorio.Remove(id);
+            uow.UsuarioRepositorio.Deletar(usuario);
+            uow.Commit();
 
             return new NoContentResult();
         }
