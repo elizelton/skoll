@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
 
   autenticarUsuario(form: PoPageLogin) {
-   if (!this.loginService.autenticarUsuario(form)){
+   if (!this.loginService.autenticarUsuario(form)) {
     this.passwordErrors = ['Senha e/ou usuário inválido, verifique e tente novamente.'];
     this.loginErrors = ['Senha e/ou usuário inválido, verifique e tente novamente.'];
    }

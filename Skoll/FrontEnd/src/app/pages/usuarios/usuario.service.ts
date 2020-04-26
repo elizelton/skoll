@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IUsuario } from 'src/app/model/Isuario.interface';
+import { IUsuario } from 'src/app/model/IUsuario.interface';
 
 @Injectable({
   providedIn: 'root'

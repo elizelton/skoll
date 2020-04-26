@@ -1,4 +1,4 @@
-import { IUsuario } from './../../model/Isuario.interface';
+import { IUsuario } from '../../model/IUsuario.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from './usuario.service';
 import { HttpClient } from '@angular/common/http';

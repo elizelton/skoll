@@ -1,3 +1,4 @@
+import { LoginService } from './pages/login/login.service';
 import { LoginComponent } from './pages/login/login.component';
 import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,7 +13,7 @@ import { PoModule } from '@portinari/portinari-ui';
 import { PoTemplatesModule } from '@portinari/portinari-templates';
 import { PagesModule } from './pages/pages.module';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
-import { AuthGuardComponent } from './auth-guard/auth-guard.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 
@@ -20,24 +21,22 @@ import { AuthGuardComponent } from './auth-guard/auth-guard.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    AuthGuardComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: LoginComponent, pathMatch: 'full' },
-      { path: 'login', component: LoginComponent },
-      { path: 'home', component: HomeComponent },
-      { path: 'usuarios', component: UsuariosComponent },
-      { path: 'usuario/:id', component: UsuarioComponent },
+      { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [AuthGuard] },
+      { path: 'login', component: LoginComponent},
+      { path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard] },
+      { path: 'usuario/:id', component: UsuarioComponent, canActivate: [AuthGuard] },
     ]),
     PoModule,
     PoTemplatesModule,
-    PagesModule
+    PagesModule,
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })

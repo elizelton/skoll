@@ -33,7 +33,9 @@ export class UsuarioComponent implements OnInit {
     ];
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
+    this.route.params.subscribe(
+      params => this.id = params['id']
+    );
 
     if ((this.id || '0') === '0') {
       this.titulo = 'Novo Usuário';
