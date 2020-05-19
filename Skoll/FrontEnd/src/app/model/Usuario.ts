@@ -4,4 +4,5 @@ export class Usuario {
     nome: string;
     autenticado: boolean;
     accessToken: string;
+    sessaoExpira: Date;
 }

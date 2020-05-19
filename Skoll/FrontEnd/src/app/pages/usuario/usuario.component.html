@@ -1,5 +1,12 @@
 <po-page-default p-title="{{ titulo }}">
-
+    <po-breadcrumb
+    [p-items]="[
+      { label: 'Home', link: '/' },
+      { label: 'Usuários', link: 'usuarios' },
+      { label: 'Usuario', link: 'usuarios/0' }
+    ]"
+  >
+  </po-breadcrumb>
     <po-dynamic-form #dynamicForm 
         p-auto-focus="nome"
         [p-fields]="fields" 

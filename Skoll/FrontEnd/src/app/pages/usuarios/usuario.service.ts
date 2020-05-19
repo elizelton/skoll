@@ -2,38 +2,19 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUsuario } from 'src/app/model/IUsuario.interface';
+import { CrudService } from 'src/app/shared/crud-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
-
-  private apiUrl = this.baseUrl + 'api/usuario' ;
+export class UsuarioService extends CrudService<IUsuario>  {
 
   httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
-  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string)  { }
+  constructor(protected http: HttpClient, @Inject('BASE_URL') protected baseUrl: string)  {
 
-  getUsuarios(): Observable<IUsuario[]> {
-    return this.http.get<IUsuario[]>(this.apiUrl);
-  }
-
-  getUsuario(usuarioID: String): Observable<IUsuario> {
-    return this.http.get<IUsuario>(this.apiUrl + '/' + usuarioID );
-  }
-
-  postUsuario(usuario: IUsuario): Observable<IUsuario> {
-    return this.http.post<IUsuario>(this.apiUrl, usuario, this.httpOptions);
-  }
-
-  editarUsuario(usuarioID: string, usuario: IUsuario): Observable<IUsuario> {
-    const apiurl = `${this.apiUrl}/${usuarioID}`;
-    return this.http.put<IUsuario>(apiurl, usuario, this.httpOptions);
-  }
-
-  excluirUsuario(usuarioID: Number): Observable<Number> {
-    const apiurl = `${this.apiUrl}/${usuarioID}`;
-    return this.http.delete<number>(apiurl, this.httpOptions);
+    super(http,
+      `${baseUrl}api/usuario`);
   }
 
   getUserDocument(value) {

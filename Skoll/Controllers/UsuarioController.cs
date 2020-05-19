@@ -26,7 +26,7 @@ namespace Skoll.Controllers
         }
 
         // GET: api/Usuario     
-        //[Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpGet]
         public IEnumerable<Usuario> Get()
         {
@@ -34,7 +34,7 @@ namespace Skoll.Controllers
         }
 
         // GET: api/Usuario/5
-        //[Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpGet("{id}", Name = "GetUsuario")]
         public IActionResult Get(int id)
         {
@@ -47,7 +47,7 @@ namespace Skoll.Controllers
         }
 
         // POST: api/Usuario
-        //[Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpPost]
         public IActionResult Post([FromBody] Usuario user)
         {
@@ -69,7 +69,7 @@ namespace Skoll.Controllers
         }
 
         // PUT: api/Usuario/5
-        //[Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody] Usuario user)
         {
@@ -83,8 +83,8 @@ namespace Skoll.Controllers
 
             usuario.Login = user.Login;
             usuario.Nome = user.Nome;
-            if(!String.IsNullOrEmpty(user.Senha))
-                usuario.Senha = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(user.Senha)).ToString();
+            if (!String.IsNullOrEmpty(user.Senha))
+                usuario.Senha = user.Senha;//md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(user.Senha)).ToString();
             usuario.Situacao = user.Situacao;
 
             uow.UsuarioRepositorio.Atualizar(usuario);
@@ -94,7 +94,7 @@ namespace Skoll.Controllers
         }
 
         // DELETE: api/ApiWithActions/5
-        //[Authorize("Bearer")]
+        [Authorize("Bearer")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {

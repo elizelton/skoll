@@ -1,52 +1,59 @@
 <po-page-default>
-  <div class="po-row">
+  <po-breadcrumb
+    [p-items]="[
+      { label: 'Home', link: '' }
+    ]"
+  >
+  </po-breadcrumb>
+  <div class=" po-row">
 
-    <po-widget class="po-lg-6 po-mt-2" p-background="../../../assets/graphics/days-to-payment.png" p-height="210"
-      p-primary="true" p-title="Days to Payment" (p-click)="daysPayment()">
+    <po-widget class="po-lg-6 po-mt-2"
+      p-background="https://www.google.com/url?sa=i&url=https%3A%2F%2Fvisualmodo.com%2Fpaypal-payment-request-usage-guide%2F&psig=AOvVaw2rhtAUDPRCrJQOhYA5ySjn&ust=1589575644787000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCICLtPGctOkCFQAAAAAdAAAAABADhttps://www.google.com/url?sa=i&url=https%3A%2F%2Fvisualmodo.com%2Fpaypal-payment-request-usage-guide%2F&psig=AOvVaw2rhtAUDPRCrJQOhYA5ySjn&ust=1589575644787000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCICLtPGctOkCFQAAAAAdAAAAABAD"
+      p-height="210" p-primary="true" p-title="Dias para Pagamento" (p-click)="daysPayment()">
 
-      <div class="po-font-subtitle po-text-center">17 days left</div>
-      <div class="po-text-center">Scheduled to 05/04/2018</div>
+      <div class="po-font-subtitle po-text-center">17 dias restantes</div>
+      <div class="po-text-center">Agendado para 05/04/2018</div>
     </po-widget>
 
-    <po-widget class="po-lg-3 po-mt-2" p-height="200" p-primary="true" p-primary-label="Details" p-title="Total savings"
-      (p-primary-action)="openModal('savings')">
+    <po-widget class="po-lg-3 po-mt-2" p-height="200" p-primary="true" p-primary-label="Detalhes"
+      p-title="Total de Vendas" (p-primary-action)="openModal('savings')">
 
-      <div class="po-font-subtitle po-text-center">$5.000,00</div>
-      <div class="po-text-center">Last updated at 18:34</div>
+      <div class="po-font-subtitle po-text-center">R$ 5.000,00</div>
+      <div class="po-text-center">Última atualização 18:34</div>
     </po-widget>
 
-    <po-widget class="po-lg-3 po-mt-2" p-height="200" p-primary-label="Details" p-title="Total checking account"
+    <po-widget class="po-lg-3 po-mt-2" p-height="200" p-primary-label="Detalhes" p-title="Valor total da conta"
       (p-primary-action)="openModal('account')">
 
-      <div class="po-font-subtitle po-text-center">$2.818,29</div>
-      <div class="po-text-center">Last updated at 08:20</div>
+      <div class="po-font-subtitle po-text-center">R$ 2.818,29</div>
+      <div class="po-text-center">Última 08:20</div>
     </po-widget>
 
-  </div>
+    </div>
 
-  <div class="po-row">
+    <div class="po-row">
 
-    <po-widget class="po-md-12 po-lg-4 po-mt-2" p-title="Category with the highest expense">
+      <po-widget class="po-md-12 po-lg-4 po-mt-2" p-title="Categoria com maior gastos">
 
-      <div class="po-font-subtitle po-text-center">$1.500,00</div>
-      <div class="po-text-center">Meal</div>
-    </po-widget>
+        <div class="po-font-subtitle po-text-center">R$ 1.500,00</div>
+        <div class="po-text-center">Refeição</div>
+      </po-widget>
 
-    <po-widget class="po-md-12 po-lg-4 po-mt-2" p-title="Most used payment type">
+      <po-widget class="po-md-12 po-lg-4 po-mt-2" p-title="Pagamento mais utilizado">
 
-      <div class="po-font-subtitle po-text-center">Credit card</div>
-      <div class="po-text-center">MasterCard - 5500 0000 0000 0004</div>
-    </po-widget>
+        <div class="po-font-subtitle po-text-center">Cartão de crédito</div>
+        <div class="po-text-center">MasterCard - 5500 0000 0000 0004</div>
+      </po-widget>
 
-    <po-widget class="po-md-12 po-lg-4 po-mt-2" p-title="Higher revenue in month">
+      <po-widget class="po-md-12 po-lg-4 po-mt-2" p-title="Melhor receita no mês">
 
-      <div class="po-font-subtitle po-text-center">$2.000,00</div>
-      <div class="po-text-center">05/03/2018</div>
-    </po-widget>
-  </div>
+        <div class="po-font-subtitle po-text-center">R$ 2.000,00</div>
+        <div class="po-text-center">05/03/2018</div>
+      </po-widget>
+    </div>
 
-  <po-modal #detailsModal [p-title]="titleDetailsModal">
-    <po-table [p-columns]="columnsDetails" [p-items]="itemsDetails">
-    </po-table>
-  </po-modal>
+    <po-modal #detailsModal [p-title]="titleDetailsModal">
+      <po-table [p-columns]="columnsDetails" [p-items]="itemsDetails">
+      </po-table>
+    </po-modal>
 </po-page-default>

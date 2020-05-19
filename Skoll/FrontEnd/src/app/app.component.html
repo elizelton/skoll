@@ -1,6 +1,10 @@
 <div class="po-wrapper">
     <nav *ngIf="mostrarMenu">
-        <po-toolbar p-title="Skoll" [p-profile]="profile">
+        <po-toolbar p-title="Skoll"
+         [p-profile]="profile"
+         [p-profile-actions]="profileActions"
+         [p-notification-actions]="notificationActions"
+         [p-notification-number]="getNotificationNumber()">
         </po-toolbar>
 
         <po-menu [p-menus]="menus" p-collapsed p-filter p-logo="../assets/img/logo.png">

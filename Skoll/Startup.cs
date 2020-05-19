@@ -43,7 +43,9 @@ namespace Skoll
                 )
             );
 
-            services.AddTransient<IRepositorio<Usuario>, Repositorios.IRepositorio<Usuario>>();
+            //services.AddScoped(typeof(IRepositorio<Usuario>), typeof(IRepositorio<Usuario>));
+
+            services.AddTransient<IUnitOfWork, UnitOfWork>();
 
             var signingConfigurations = new SigningConfigurations();
             services.AddSingleton(signingConfigurations);

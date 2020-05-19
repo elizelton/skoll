@@ -77,6 +77,7 @@ namespace Skoll.Controllers
                     nome = usuarioAutenticado.Nome,
                     autenticado = true,
                     accessToken = token,
+                    sessaoExpira = dataExpiracao
                 };
             }
             else

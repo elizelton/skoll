@@ -10,6 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
+  "es5BrowserSupport": false,
   "private": true,
   "dependencies": {
     "@angular/animations": "8.2.12",
@@ -21,6 +22,7 @@
     "@angular/platform-browser-dynamic": "8.2.12",
     "@angular/platform-server": "8.2.12",
     "@angular/router": "8.2.12",
+    "@babel/compat-data": "^7.8.0",
     "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "@portinari/portinari-templates": "^1.28.0",
     "@portinari/portinari-ui": "^1.28.0",

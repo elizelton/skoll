@@ -1,8 +1,7 @@
 import { IUsuario } from '../../model/IUsuario.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from './usuario.service';
-import { HttpClient } from '@angular/common/http';
-import { PoDynamicFormField, PoNotificationService, PoDynamicFormComponent, PoTableColumn, PoTableAction, PoDialogService } from '@portinari/portinari-ui';
+import { PoNotificationService, PoDynamicFormComponent, PoTableColumn, PoTableAction, PoDialogService } from '@portinari/portinari-ui';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,8 +11,7 @@ import { Router } from '@angular/router';
 })
 export class UsuariosComponent implements OnInit {
 
-  constructor(http: HttpClient,
-    private usuarioService: UsuarioService,
+  constructor(private usuarioService: UsuarioService,
     public poNotification: PoNotificationService,
     private poDialog: PoDialogService,
     private router: Router) { }
@@ -42,7 +40,7 @@ export class UsuariosComponent implements OnInit {
 
 
   ngOnInit() {
-    this.usuarioService.getUsuarios()
+    this.usuarioService.getAll()
       .subscribe(result => {
         this.usuarios = result;
       }, error => this.poNotification.error(error));
@@ -53,7 +51,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   editarUsuario(usuario: IUsuario) {
-    this.router.navigate(['/usuario/' + usuario.id]);
+    this.router.navigate(['/usuarios/' + usuario.id]);
   }
 
   excluirUsuarioDialog(usuario: IUsuario) {
@@ -66,9 +64,9 @@ export class UsuariosComponent implements OnInit {
   }
 
   excluirUsuario(usuarioID: Number) {
-    this.usuarioService.excluirUsuario(usuarioID).subscribe(
+    this.usuarioService.delete(usuarioID).subscribe(
       response => { this.poNotification.success('Usuário excluido com sucesso!');
-      this.usuarioService.getUsuarios()
+      this.usuarioService.getAll()
       .subscribe(result => {
         this.usuarios = result;
       }, error => this.poNotification.error(error));
@@ -78,6 +76,6 @@ export class UsuariosComponent implements OnInit {
   }
 
   novoUsuario() {
-    this.router.navigate(['/usuario/0']);
+    this.router.navigate(['/usuarios/0']);
   }
 }

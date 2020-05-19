@@ -46,7 +46,7 @@ export class UsuarioComponent implements OnInit {
 
     } else {
       this.titulo = 'Edição de usuário';
-      this.usuarioService.getUsuario(this.id).subscribe(
+      this.usuarioService.get(this.id).subscribe(
         result => this.usuario = result,
         error => this.poNotification.error(error)
       );
@@ -61,7 +61,7 @@ export class UsuarioComponent implements OnInit {
     //  poNotification.success('Data saved successfully!');
 
     if (this.dynamicForm.value.id === 0) {
-      this.usuarioService.postUsuario(form.form.value).subscribe(
+      this.usuarioService.insert(form.form.value).subscribe(
         response => { this.poNotification.success('Usuário ' + response.login.toString() + ' com sucesso!'); form.form.reset(); },
         err => {
           this.poNotification.error(err.error),
@@ -70,7 +70,7 @@ export class UsuarioComponent implements OnInit {
         }
       );
     } else {
-      this.usuarioService.editarUsuario(this.dynamicForm.value.id, this.dynamicForm.value).subscribe(
+      this.usuarioService.update(this.dynamicForm.value.id, this.dynamicForm.value).subscribe(
         () => { this.poNotification.success(`Usuário ${this.dynamicForm.value.login} com sucesso!`); this.router.navigate(['/usuarios']); },
         err => {
           this.poNotification.error(err.error),

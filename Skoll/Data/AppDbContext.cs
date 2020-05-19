@@ -8,8 +8,8 @@ namespace Skoll.Data
 {
     public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
-        public AppDbContext()
-          : base()
+        public AppDbContext(DbContextOptions<AppDbContext> option)
+          : base(option)
         {
         }
 

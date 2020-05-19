@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 using Skoll.Repositorios;
 using System;
 using System.Collections.Generic;
@@ -15,9 +16,9 @@ namespace Skoll.Data
 
         private Repositorio<Usuario> usuarioRepositorio = null;
 
-        public UnitOfWork()
+        public UnitOfWork(DbContextOptions<AppDbContext> option)
         {
-            _contexto = new AppDbContext();
+            _contexto = new AppDbContext(option);
         }
 
         #region Interface Repositorios
